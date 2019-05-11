@@ -41,9 +41,8 @@ public class AirportTest {
         flights.add(flight2);
         flights.add(flight3);
         airport = new Airport("EDI", hangars, flights);
-        passenger = new Passenger();
+        passenger = new Passenger("Dod");
         passengers = new ArrayList<>();
-
 
 
     }
@@ -86,16 +85,25 @@ public class AirportTest {
         Ticket expectedTicket = new Ticket(flight1);
         assertEquals(expectedTicket, airport.sellTicketForFlight(flight1));
     }
-    @Test
-    public void canAddPassengersToFlight(){
-        plane1.addPassenger(passenger);
-        flight1.getPlane();
-        assertEquals(1, airport.addPassengersToFlight(flight1));
-    }
-//
-//    public void numberOfPassengersBookedPerFlight(){
-//        assertEquals(2, airport.passengersPerFlight(passenger));
-//    }
 
+    @Test
+    public void canAddPassengersToFlight() {
+        Passenger passenger1 = new Passenger("Bob");
+        int flightNumber = 346;
+        airport.addPassengerToFlight(flightNumber, passenger1);
+        assertEquals(1, plane2.getPassengersSize());
+        assertEquals(passenger1, plane2.getPassengers().get(0));
+        assertEquals(1, airport.passengerCountForFlightNumber(flightNumber));
+
+    }
+
+    @Test
+    public void cannotAddPassengersFlightDoesNotExists() {
+        Passenger passenger1 = new Passenger("Bob");
+        int flightNumber = 349;
+        airport.addPassengerToFlight(flightNumber, passenger1);
+        assertEquals(0, airport.passengerCountForFlightNumber(flightNumber));
+
+    }
 
 }

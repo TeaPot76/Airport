@@ -1,8 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 import static junit.framework.TestCase.assertEquals;
 
 public class FlightTest {

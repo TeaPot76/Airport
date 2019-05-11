@@ -1,23 +1,19 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Airport {
     private String code;
     private ArrayList<Hangar> hangars;
     private ArrayList<Flight> flights;
-
-    public Airport(String code) {
-        this.code = code;
-        this.hangars = new ArrayList<>();
-        this.flights = new ArrayList<>();
-
-    }
+    private Map<Integer, Integer> flightCount;
 
     public Airport(String code, ArrayList<Hangar> hangars, ArrayList<Flight> flights) {
         this.code = code;
         this.hangars = hangars;
         this.flights = flights;
+        this.flightCount = new HashMap<>();
     }
-
 
 
     public String getCode() {
@@ -35,7 +31,6 @@ public class Airport {
 
     public void addHangar(Hangar hangar) {
         this.hangars.add(hangar);
-
 
 
     }
@@ -61,17 +56,25 @@ public class Airport {
         return new Ticket(flight);
     }
 
-    public int addPassengersToFlight( Flight flight) {
-        return flight.getPlane().getPassengersSize();
 
-      }
+    public void addPassengerToFlight(int flightNumber, Passenger passenger) {
+        for (Flight flight : flights) {
+            if (flight.getFlightNumber() == flightNumber) {
+                flight.getPlane().addPassenger(passenger);
+                if (flightCount.containsKey(flightNumber)) {
+                    int currentCount = flightCount.get(flightNumber);
+                    flightCount.put(flightNumber, currentCount + 1);
+                } else {
+                    flightCount.put(flightNumber, 1);
+                }
 
-//
-//    public int passengersPerFlight(Passenger passenger){
-//        Passenger passengers = new ArrayList<Passenger>();
-//        passengers.add(passenger);
-//        return passengers.size();
-//    }
+            }
 
+        }
+    }
+
+    public int passengerCountForFlightNumber(int flightNumber) {
+        return flightCount.getOrDefault(flightNumber, 0);
+    }
 }
 

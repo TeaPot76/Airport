@@ -15,7 +15,7 @@ public class PlaneTest {
     public void before() {
         passengers = new ArrayList<>();
         plane = new Plane(Type.AIRBUS, "SunnyHoliday");
-        passenger = new Passenger();
+        passenger = new Passenger("Dan");
 
     }
 
