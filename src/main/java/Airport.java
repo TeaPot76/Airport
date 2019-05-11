@@ -3,17 +3,22 @@ import java.util.ArrayList;
 public class Airport {
     private String code;
     private ArrayList<Hangar> hangars;
+    private ArrayList<Flight> flights;
 
     public Airport(String code) {
         this.code = code;
         this.hangars = new ArrayList<>();
+        this.flights = new ArrayList<>();
 
     }
 
-    public Airport(String code, ArrayList<Hangar> hangars) {
+    public Airport(String code, ArrayList<Hangar> hangars, ArrayList<Flight> flights) {
         this.code = code;
         this.hangars = hangars;
+        this.flights = flights;
     }
+
+
 
     public String getCode() {
         return code;
@@ -30,6 +35,8 @@ public class Airport {
 
     public void addHangar(Hangar hangar) {
         this.hangars.add(hangar);
+
+
 
     }
 
@@ -54,11 +61,17 @@ public class Airport {
         return new Ticket(flight);
     }
 
-    public int trackNumberOfPassengersForFlight( Flight flight) {
+    public int addPassengersToFlight( Flight flight) {
         return flight.getPlane().getPassengersSize();
 
       }
 
+//
+//    public int passengersPerFlight(Passenger passenger){
+//        Passenger passengers = new ArrayList<Passenger>();
+//        passengers.add(passenger);
+//        return passengers.size();
+//    }
 
-    }
+}
 
