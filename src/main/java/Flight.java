@@ -5,12 +5,12 @@ public class Flight {
 
     private String destination;
     private int flightNumber;
-    private ArrayList<Plane> flightPlane;
+    private Plane flightPlane;
 
-    public Flight(String destination, int flightNumber) {
+    public Flight(String destination, int flightNumber, Plane flightPlane) {
         this.destination = destination;
         this.flightNumber = flightNumber;
-        this.flightPlane = new ArrayList<>();
+        this.flightPlane = flightPlane;
     }
 
     public String getDestination() {
@@ -21,20 +21,10 @@ public class Flight {
         return flightNumber;
     }
 
-    public ArrayList<Plane> getPlane() {
+    public Plane getPlane() {
         return flightPlane;
-    }
 
-    public int planeSize() {
-        return flightPlane.size();
-    }
 
-    public void addPlane(Plane plane) {
-        this.flightPlane.add(plane);
-    }
-
-    public void removePlane(Plane plane) {
-        this.flightPlane.remove(0);
     }
 
     @Override

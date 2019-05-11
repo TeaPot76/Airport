@@ -11,10 +11,9 @@ public class AirportTest {
     private ArrayList<Hangar> hangars;
     private Hangar hangar;
     private Plane plane;
-    private ArrayList<Plane> flightPlanes;
-    private Flight flight;
     private Passenger passenger;
     private ArrayList<Passenger> passengers;
+    private Flight flight;
 
     @Before
     public void before() {
@@ -22,10 +21,10 @@ public class AirportTest {
         airport = new Airport("EDI", hangars);
         hangar = new Hangar();
         plane = new Plane(Type.AIRBUS, "Jet");
-        flightPlanes = new ArrayList<>();
-        flight = new Flight("Warsaw", 345);
         passenger = new Passenger();
-        passengers = new ArrayList<>();
+        passengers = new ArrayList<>();flight = new Flight("Dubrovnik", 234, plane);
+        flight = new Flight("Warsaw", 345, plane);
+
 
 
     }
@@ -51,8 +50,7 @@ public class AirportTest {
     public void canCreateFlight() {
         hangar.addPlane(plane);
         airport.addHangar(hangar);
-        Flight expectedFlight = new Flight("DarkSideOfSoul", 123);
-        expectedFlight.addPlane(plane);
+        Flight expectedFlight = new Flight("DarkSideOfSoul", 123, plane);
         Flight darkSideOfSoul = airport.createFlight("DarkSideOfSoul", 123, plane);
         assertEquals(expectedFlight, darkSideOfSoul);
     }
@@ -67,9 +65,14 @@ public class AirportTest {
 
     @Test
     public void canSellTicketForFlight() {
-        Flight expectedFlight = new Flight("DarkSideOfSoul", 123);
-        Ticket expectedTicket = new Ticket(expectedFlight);
-        assertEquals(expectedTicket, airport.sellTicketForFlight(expectedFlight));
+        Ticket expectedTicket = new Ticket(flight);
+        assertEquals(expectedTicket, airport.sellTicketForFlight(flight));
+    }
+    @Test
+    public void canTrackNumberOfPassengersPerFlight(){
+        plane.addPassenger(passenger);
+        flight.getPlane();
+        assertEquals(1, airport.trackNumberOfPassengersForFlight(flight));
     }
 
 

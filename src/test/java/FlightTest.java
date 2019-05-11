@@ -9,13 +9,12 @@ public class FlightTest {
 
     private Plane plane;
     private Flight flight;
-    private ArrayList<Plane> flightPlane;
+    private Plane flightPlane;
 
     @Before
     public void before() {
-        flightPlane = new ArrayList<>();
-        plane = new Plane(Type.AIRBUS, "Destination");
-        flight = new Flight("Warsaw", 234);
+        flightPlane = new Plane(Type.AIRBUS, "Destination");
+        flight = new Flight("Warsaw", 234, flightPlane);
     }
 
     @Test
@@ -33,16 +32,5 @@ public class FlightTest {
         assertEquals(flightPlane, flight.getPlane());
     }
 
-    @Test
-    public void canAddPlane() {
-        flight.addPlane(plane);
-        assertEquals(1, flight.planeSize());
-    }
 
-    @Test
-    public void canRemoevePlane() {
-        flight.addPlane(plane);
-        flight.removePlane(plane);
-        assertEquals(0, flight.planeSize());
-    }
 }

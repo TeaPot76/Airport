@@ -35,10 +35,10 @@ public class Airport {
 
     public Flight createFlight(String destination, int flightNumber, Plane plane) {
         boolean foundPlane = false;
-        Flight flight = new Flight(destination, flightNumber);
+        Flight flight = new Flight(destination, flightNumber, plane);
         for (Hangar hangar : this.hangars) {
             if (hangar.getPlanes().contains(plane)) {
-                flight.addPlane(plane);
+                flight.getPlane();
                 foundPlane = true;
             }
         }
@@ -53,4 +53,12 @@ public class Airport {
     public Ticket sellTicketForFlight(Flight flight) {
         return new Ticket(flight);
     }
-}
+
+    public int trackNumberOfPassengersForFlight( Flight flight) {
+        return flight.getPlane().getPassengersSize();
+
+      }
+
+
+    }
+
