@@ -4,7 +4,7 @@ public class Airport {
     private String code;
     private ArrayList<Hangar> hangars;
 
-    public Airport(String code){
+    public Airport(String code) {
         this.code = code;
         this.hangars = new ArrayList<>();
 
@@ -31,5 +31,26 @@ public class Airport {
     public void addHangar(Hangar hangar) {
         this.hangars.add(hangar);
 
+    }
+
+    public Flight createFlight(String destination, int flightNumber, Plane plane) {
+        boolean foundPlane = false;
+        Flight flight = new Flight(destination, flightNumber);
+        for (Hangar hangar : this.hangars) {
+            if (hangar.getPlanes().contains(plane)) {
+                flight.addPlane(plane);
+                foundPlane = true;
+            }
+        }
+        if (foundPlane) {
+            return flight;
+        } else {
+            return null;
+        }
+    }
+
+
+    public Ticket sellTicketForFlight(Flight flight) {
+        return new Ticket(flight);
     }
 }

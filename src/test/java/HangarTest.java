@@ -18,25 +18,36 @@ public class HangarTest {
         plane = new Plane(Type.AIRBUS, "SunnyTrip");
 
     }
+
     @Test
-    public void hasPlane(){
+    public void hasPlane() {
         assertEquals(planes, hangar.getPlanes());
     }
+
     @Test
-    public void hasSize(){
+    public void hasSize() {
         assertEquals(0, hangar.numberOfPlanes());
 
     }
+
     @Test
-    public void canAddPlane(){
+    public void canAddPlane() {
         hangar.addPlane(plane);
         assertEquals(1, hangar.numberOfPlanes());
     }
+
     @Test
-    public void canDispatchPlane(){
+    public void canDispatchPlane() {
         hangar.addPlane(plane);
         hangar.dispatchPlane();
         assertEquals(0, hangar.numberOfPlanes());
+    }
+
+    @Test
+    public void canGetPlaneByPlaneType() {
+        hangar.addPlane(plane);
+        Plane returnedPlane = hangar.getPlaneByPlaneType(Type.AIRBUS);
+        assertEquals(Type.AIRBUS, returnedPlane.getType());
     }
 }
 

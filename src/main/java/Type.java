@@ -1,7 +1,7 @@
 public enum Type {
 
-    BOEING (150),
-    JET (120),
+    BOEING(150),
+    JET(120),
     AIRBUS(130),
     TURBOPROP(60),
     HELICOPTER(6),
@@ -9,7 +9,8 @@ public enum Type {
     EVERET(100);
 
     private final int capacity;
-    Type(int capacity){
+
+    Type(int capacity) {
         this.capacity = capacity;
     }
 

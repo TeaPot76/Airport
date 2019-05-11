@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Plane {
 
@@ -30,5 +31,28 @@ public class Plane {
 
     public int capacity() {
         return type.getCapacity();
+    }
+
+    public void addPassenger(Passenger passenger) {
+        this.passengers.add(passenger);
+    }
+
+    public void removePassenger(Passenger passenger) {
+        this.passengers.remove(0);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Plane plane = (Plane) o;
+        return type == plane.type &&
+                airlineName.equals(plane.airlineName) &&
+                passengers.equals(plane.passengers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, airlineName, passengers);
     }
 }

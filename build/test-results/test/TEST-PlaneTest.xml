@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="PlaneTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2019-05-11T12:20:44" hostname="users-MBP" time="0.003">
+  <properties/>
+  <testcase name="canRemovePassenger" classname="PlaneTest" time="0.0"/>
+  <testcase name="canAddPassenger" classname="PlaneTest" time="0.0"/>
+  <testcase name="hasCapacity" classname="PlaneTest" time="0.0"/>
+  <testcase name="hasAirlineName" classname="PlaneTest" time="0.0"/>
+  <testcase name="hasType" classname="PlaneTest" time="0.0"/>
+  <testcase name="hasPassengers" classname="PlaneTest" time="0.001"/>
+  <testcase name="hasPassengersSize" classname="PlaneTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
