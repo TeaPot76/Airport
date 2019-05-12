@@ -13,12 +13,23 @@ public class AirportTest {
     private Flight flight1;
     private Flight flight2;
     private Flight flight3;
+    private Flight flight4;
+
     private Hangar hangar;
     private Plane plane1;
     private Plane plane2;
     private Plane plane3;
+    private Plane plane6;
 
     private Passenger passenger;
+    private Passenger passenger1;
+    private Passenger passenger2;
+    private Passenger passenger3;
+    private Passenger passenger4;
+    private Passenger passenger5;
+    private Passenger passenger6;
+    private Passenger passenger7;
+
     private ArrayList<Passenger> passengers;
 
     @Before
@@ -26,10 +37,13 @@ public class AirportTest {
         plane1 = new Plane(Type.AIRBUS, "Jet");
         plane2 = new Plane(Type.BOEING, "BA");
         plane3 = new Plane(Type.HELICOPTER, "Helipad");
+        plane6 = new Plane(Type.HELICOPTER, "Das");
 
         flight1 = new Flight("Warsaw", 345, plane1);
         flight2 = new Flight("Inverness", 346, plane2);
         flight3 = new Flight("Teneriffe", 347, plane3);
+        flight4 = new Flight("Teneriffe", 123, plane6);
+
         hangar = new Hangar();
         hangar.addPlane(plane1);
         hangar.addPlane(plane2);
@@ -40,9 +54,18 @@ public class AirportTest {
         flights.add(flight1);
         flights.add(flight2);
         flights.add(flight3);
+        flights.add(flight4);
         airport = new Airport("EDI", hangars, flights);
         passenger = new Passenger("Dod");
         passengers = new ArrayList<>();
+        passenger1 = new Passenger("Dod");
+        passenger2 = new Passenger("Dod");
+        passenger3 = new Passenger("Dod");
+        passenger4 = new Passenger("Dod");
+        passenger5 = new Passenger("Dod");
+        passenger6 = new Passenger("Dod");
+        passenger7 = new Passenger("Dod");
+
 
 
     }
@@ -82,8 +105,27 @@ public class AirportTest {
 
     @Test
     public void canSellTicketForFlight() {
+        Plane plane6 = new Plane(Type.EVERET, "Das");
+        Passenger passenger1 = new Passenger("Dod");
         Ticket expectedTicket = new Ticket(flight1);
-        assertEquals(expectedTicket, airport.sellTicketForFlight(flight1));
+        int flightNumber = 345;
+        airport.addPassengerToFlight(flightNumber, passenger1);
+        assertEquals(expectedTicket, airport.sellTicketForFlight(flightNumber));
+    }
+    @Test
+    public void canNotSellTicketForFlight() {
+
+        Ticket expectedTicket= new Ticket(flight4);
+        int flightNumber = 123;
+        airport.addPassengerToFlight(flightNumber, passenger1);
+        airport.addPassengerToFlight(flightNumber, passenger2);
+        airport.addPassengerToFlight(flightNumber, passenger3);
+        airport.addPassengerToFlight(flightNumber, passenger4);
+        airport.addPassengerToFlight(flightNumber, passenger5);
+        airport.addPassengerToFlight(flightNumber, passenger6);
+       airport.addPassengerToFlight(flightNumber, passenger7);
+
+        assertEquals(null, airport.sellTicketForFlight(flightNumber));
     }
 
     @Test
@@ -105,5 +147,6 @@ public class AirportTest {
         assertEquals(0, airport.passengerCountForFlightNumber(flightNumber));
 
     }
+
 
 }

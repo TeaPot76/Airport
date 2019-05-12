@@ -52,8 +52,20 @@ public class Airport {
     }
 
 
-    public Ticket sellTicketForFlight(Flight flight) {
-        return new Ticket(flight);
+    public Ticket sellTicketForFlight(int flightNumber) {
+        for (Flight flight : flights) {
+            if (flight.getFlightNumber() == flightNumber) {
+                Plane plane = flight.getPlane();
+                if (this.passengerCountForFlightNumber(flightNumber) <= plane.capacity()) {
+                    Ticket ticket = new Ticket(flight);
+                    return ticket;
+                }
+
+            }
+        }
+        return null;
+
+
     }
 
 
