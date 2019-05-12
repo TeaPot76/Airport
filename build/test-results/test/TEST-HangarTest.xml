@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="HangarTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2019-05-11T20:29:00" hostname="users-MBP" time="0.003">
+<testsuite name="HangarTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2019-05-12T21:46:39" hostname="users-MBP" time="0.004">
   <properties/>
-  <testcase name="canAddPlane" classname="HangarTest" time="0.0"/>
-  <testcase name="canGetPlaneByPlaneType" classname="HangarTest" time="0.001"/>
+  <testcase name="canAddPlane" classname="HangarTest" time="0.001"/>
+  <testcase name="canGetPlaneByPlaneType" classname="HangarTest" time="0.0"/>
   <testcase name="canDispatchPlane" classname="HangarTest" time="0.0"/>
-  <testcase name="hasPlane" classname="HangarTest" time="0.001"/>
+  <testcase name="hasPlane" classname="HangarTest" time="0.0"/>
   <testcase name="hasSize" classname="HangarTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>

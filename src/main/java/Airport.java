@@ -65,14 +65,13 @@ public class Airport {
         }
         return null;
 
-
     }
 
 
     public void addPassengerToFlight(int flightNumber, Passenger passenger) {
         for (Flight flight : flights) {
             if (flight.getFlightNumber() == flightNumber) {
-                flight.getPlane().addPassenger(passenger);
+                flight.addPassenger(passenger);
                 if (flightCount.containsKey(flightNumber)) {
                     int currentCount = flightCount.get(flightNumber);
                     flightCount.put(flightNumber, currentCount + 1);
@@ -88,5 +87,35 @@ public class Airport {
     public int passengerCountForFlightNumber(int flightNumber) {
         return flightCount.getOrDefault(flightNumber, 0);
     }
-}
 
+
+    public void allocateCorrectSizeOfPlaneToFlightId(int flightNumber) {
+        ArrayList<Plane> planes = new ArrayList<>();
+        for (Hangar hangar : this.hangars) {
+            planes.addAll(hangar.getPlanes());
+        }
+        int numberOfPassengers = passengerCountForFlightNumber(flightNumber);
+        Plane planeToUse = null;
+
+        int minimumWastedSpace = 0;
+        for (Plane planeToCheckForSize : planes) {
+            if (numberOfPassengers < planeToCheckForSize.capacity()) {
+                planeToUse = planeToCheckForSize;
+                minimumWastedSpace = planeToCheckForSize.capacity() - numberOfPassengers;
+                break;
+            }
+        }
+        for (Plane planeToCheck : planes) {
+            int wastedSpaceCurrentPlane = planeToCheck.capacity() - numberOfPassengers;
+            if (wastedSpaceCurrentPlane < minimumWastedSpace && wastedSpaceCurrentPlane > 0) {
+                planeToUse = planeToCheck;
+                minimumWastedSpace = wastedSpaceCurrentPlane;
+            }
+        }
+        for (Flight flight : flights) {
+            if (flight.getFlightNumber() == flightNumber) {
+                flight.setFlightPlane(planeToUse);
+            }
+        }
+    }
+}

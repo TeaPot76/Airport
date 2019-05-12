@@ -15,7 +15,8 @@ public class AirportTest {
     private Flight flight3;
     private Flight flight4;
 
-    private Hangar hangar;
+    private Hangar hangar1;
+    private Hangar hangar2;
     private Plane plane1;
     private Plane plane2;
     private Plane plane3;
@@ -36,7 +37,7 @@ public class AirportTest {
     public void before() {
         plane1 = new Plane(Type.AIRBUS, "Jet");
         plane2 = new Plane(Type.BOEING, "BA");
-        plane3 = new Plane(Type.HELICOPTER, "Helipad");
+        plane3 = new Plane(Type.RENTON, "Helipad");
         plane6 = new Plane(Type.HELICOPTER, "Das");
 
         flight1 = new Flight("Warsaw", 345, plane1);
@@ -44,12 +45,17 @@ public class AirportTest {
         flight3 = new Flight("Teneriffe", 347, plane3);
         flight4 = new Flight("Teneriffe", 123, plane6);
 
-        hangar = new Hangar();
-        hangar.addPlane(plane1);
-        hangar.addPlane(plane2);
-        hangar.addPlane(plane3);
+
+        hangar1 = new Hangar();
+        hangar2 = new Hangar();
+        hangar1.addPlane(plane1);
+        hangar1.addPlane(plane2);
+        hangar1.addPlane(plane3);
+        hangar2.addPlane(plane6);
+
         hangars = new ArrayList<>();
-        hangars.add(hangar);
+        hangars.add(hangar1);
+        hangars.add(hangar2);
         flights = new ArrayList<>();
         flights.add(flight1);
         flights.add(flight2);
@@ -67,7 +73,6 @@ public class AirportTest {
         passenger7 = new Passenger("Dod");
 
 
-
     }
 
     @Test
@@ -82,8 +87,8 @@ public class AirportTest {
 
     @Test
     public void hasNumberOfHangars() {
-        airport.addHangar(hangar);
-        assertEquals(2, airport.numberOfHangars());
+        airport.addHangar(hangar1);
+        assertEquals(3, airport.numberOfHangars());
     }
 
 
@@ -112,10 +117,11 @@ public class AirportTest {
         airport.addPassengerToFlight(flightNumber, passenger1);
         assertEquals(expectedTicket, airport.sellTicketForFlight(flightNumber));
     }
+
     @Test
     public void canNotSellTicketForFlight() {
 
-        Ticket expectedTicket= new Ticket(flight4);
+        Ticket expectedTicket = new Ticket(flight4);
         int flightNumber = 123;
         airport.addPassengerToFlight(flightNumber, passenger1);
         airport.addPassengerToFlight(flightNumber, passenger2);
@@ -123,7 +129,7 @@ public class AirportTest {
         airport.addPassengerToFlight(flightNumber, passenger4);
         airport.addPassengerToFlight(flightNumber, passenger5);
         airport.addPassengerToFlight(flightNumber, passenger6);
-       airport.addPassengerToFlight(flightNumber, passenger7);
+        airport.addPassengerToFlight(flightNumber, passenger7);
 
         assertEquals(null, airport.sellTicketForFlight(flightNumber));
     }
@@ -133,10 +139,9 @@ public class AirportTest {
         Passenger passenger1 = new Passenger("Bob");
         int flightNumber = 346;
         airport.addPassengerToFlight(flightNumber, passenger1);
-        assertEquals(1, plane2.getPassengersSize());
-        assertEquals(passenger1, plane2.getPassengers().get(0));
+        assertEquals(1, flight2.getPassengersSize());
+        assertEquals(passenger1, flight2.getPassengers().get(0));
         assertEquals(1, airport.passengerCountForFlightNumber(flightNumber));
-
     }
 
     @Test
@@ -146,6 +151,36 @@ public class AirportTest {
         airport.addPassengerToFlight(flightNumber, passenger1);
         assertEquals(0, airport.passengerCountForFlightNumber(flightNumber));
 
+    }
+
+    @Test
+    public void canAllocateCorrectSizePlane() {
+
+        int flightNumber = 347;
+        airport.addPassengerToFlight(flightNumber, passenger1);
+        airport.addPassengerToFlight(flightNumber, passenger2);
+        airport.addPassengerToFlight(flightNumber, passenger3);
+        airport.addPassengerToFlight(flightNumber, passenger4);
+        airport.allocateCorrectSizeOfPlaneToFlightId(flightNumber);
+
+        assertEquals(plane6, flight3.getPlane());
+    }
+
+    @Test
+    public void canAllocateCorrectSizePlaneMorePassengers() {
+        int flightNumber = 347;
+        airport.addPassengerToFlight(flightNumber, passenger1);
+        airport.addPassengerToFlight(flightNumber, passenger2);
+        airport.addPassengerToFlight(flightNumber, passenger3);
+        airport.addPassengerToFlight(flightNumber, passenger4);
+        airport.addPassengerToFlight(flightNumber, passenger5);
+        airport.addPassengerToFlight(flightNumber, passenger6);
+        airport.addPassengerToFlight(flightNumber, passenger7);
+
+
+        airport.allocateCorrectSizeOfPlaneToFlightId(flightNumber);
+
+        assertEquals(plane3, flight3.getPlane());
     }
 
 
